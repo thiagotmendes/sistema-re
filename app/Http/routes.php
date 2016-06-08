@@ -19,12 +19,23 @@ Route::get('/', function () {
     return view('forms/login');
 });
 
+//  LOGA NO SISTEMA
 Route::post('geralogin', ['as' => 'geralogin', 'uses' => 'geraLogin@userLogin']);
 
+// direciona para home enviando a sessão
 Route::get('home', function()
 {
   $usuario = Session::get('usuario');
-  return View('paginas/home', [ 'nome_usuario' => $usuario ]);
+  if ($usuario) {
+    return View('paginas/home', [ 'nome_usuario' => $usuario ]);
+  } else {
+    return View('/', [ 'erro' => 'Impossivel logar' ]);
+  }
+
 });
 
+// ROTA PARA O FORMULARIO DE CADASTRO DE USUARIOS
 Route::get('cadastrar-usuarios', ['as' => 'cadastrar-usuarios', 'uses' => 'gridUsuarios@form_cadastro']);
+
+// rota para o cadastro de USUARIOS
+Route::post('cadastrar-usuarios/executa-cadastro', ['as' => 'cadastrar-usuarios/executa-cadastro', 'uses' => 'gridUsuarios@postForm']);

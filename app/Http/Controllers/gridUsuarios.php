@@ -11,8 +11,14 @@ use App\Quotation;
 
 class gridUsuarios extends Controller
 {
-  public  function form_cadastro(){
+  public  function form_cadastro()
+  {
     $usuario = Session::get('usuario');
     return view('forms/cadastro-user',[ 'nome_usuario' => $usuario ]);
+  }
+
+  public function postForm(Request $formUsuario)
+  {
+    echo $formUsuario->nome;
   }
 }

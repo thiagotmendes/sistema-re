@@ -19,7 +19,7 @@ class geraLogin extends Controller
         $nome = $request->input('nome');
         $senha = $request->input('senha');
 
-        $resultado = DB::select('select * from res_usuarios where nome = :nome and senha = :senha', ['nome' => $nome, 'senha' => $senha]);
+        $resultado = DB::select('select * from res_usuarios where usuario = :nome and senha = :senha', ['nome' => $nome, 'senha' => $senha]);
         //$resultado = DB::table('usuarios')->where('nome','=', '$nome')->get();
 
         $nome_resultado =  $resultado[0]->nome;
@@ -28,7 +28,7 @@ class geraLogin extends Controller
         if ($nome_resultado) {
           // Obtém algum dado da sessão...
           Session::put('usuario', ['nome' => $nome, 'senha' => $senha]);
-        
+
           return redirect('/home')->with('sessao_usuario', $usuario);
         }
       endif;
