@@ -8,3 +8,13 @@
   border: #ccc solid 1px;
   padding: 20px;
 }
+
+.tabela-usuarios th{
+  background: #e7e7e7;
+  text-align: center;
+}
+
+.btn-table{
+  width: 5%;
+  text-align: center;
+}

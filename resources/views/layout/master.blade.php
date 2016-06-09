@@ -8,9 +8,9 @@
 
     <!-- Bootstrap -->
     @section('style')
-      <link rel="stylesheet" href="css/estilo.css">
-      <link rel="stylesheet" href="css/bootstrap.css">
-      <link rel="stylesheet" href="css/font-awesome.min.css">
+      <link rel="stylesheet" href="{{ asset('css/estilo.css') }}">
+      <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+      <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }} ">
 
       <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
       <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -70,6 +70,7 @@
       <script src="js/jquery-1.12.4.min.js"></script>
       <!-- Include all compiled plugins (below), or include individual files as needed -->
       <script src="js/bootstrap.js"></script>
+      <script src="js/functions.js"></script>
     @show
   </body>
 </html>

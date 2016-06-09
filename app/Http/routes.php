@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -10,11 +9,6 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
-
-/*Route::get('/', function () {
-    return view('welcome');
-});*/
 
 Route::get('/', function () {
     return view('forms/login');
@@ -32,7 +26,7 @@ Route::get('home', function()
   if ($usuario) {
     return View('paginas/home', [ 'nome_usuario' => $usuario ]);
   } else {
-    return View('/', [ 'erro' => 'Impossivel logar' ]);
+    return redirect('/');
   }
 });
 
@@ -42,5 +36,7 @@ Route::get('cadastrar-usuarios', ['as' => 'cadastrar-usuarios', 'uses' => 'gridU
 // rota para o cadastro de USUARIOS
 Route::post('cadastrar-usuarios/executa-cadastro', ['as' => 'cadastrar-usuarios/executa-cadastro', 'uses' => 'gridUsuarios@postForm']);
 Route::get('cadastrar-usuarios/{ok?}',['as' => 'cadastrar-usuarios/{ok?}', 'uses' => 'gridUsuarios@form_cadastro']);
+Route::get('editar-usuarios/{id?}',['as' => 'editar-usuarios/{id?}', 'uses' => 'gridUsuarios@form_edita_user']);
 
+// ROTA PARA O GRID DE USUARIOS
 Route::get('lista-usuarios', ['as' => 'lista-usuarios', 'uses' => 'gridUsuarios@grid_user']);

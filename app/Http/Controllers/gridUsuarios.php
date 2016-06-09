@@ -41,6 +41,17 @@ class gridUsuarios extends Controller
       return redirect()->route('cadastrar-usuarios',['msg' => 1]);
     }
   }
+  // gera o formulario de edição de usuário
+  public function form_edita_user($id)
+  {
+    $usuario = Session::get('usuario');
+
+    $dados_user = DB::select('select * from res_usuarios where idusuario = :idusuario', ['idusuario' => $id]);
+    //var_dump($dados_user);
+
+    return view('forms/cadastro-user',[ 'nome_usuario' => $usuario, 'dados_user' => $dados_user ]);
+  }
+
 
   // GERA O GRID COM ALISTA DOS USUARIOS
   public function grid_user()
