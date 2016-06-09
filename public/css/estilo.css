@@ -18,3 +18,36 @@
   width: 5%;
   text-align: center;
 }
+
+.form-anexo{
+  border: #ccc solid 1px;
+  padding: 20px;
+}
+
+.form-anexo header{
+  border-bottom: #ccc solid 1px;
+  margin-bottom: 20px;
+  text-align: center;
+  padding:0 0 15px;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+.interacoes-grid{
+  border:#ccc solid 1px;
+  margin-bottom: 15px;
+}
+
+.title-interact{
+  padding: 8px 15px;
+  background: #eaeaea;
+}
+
+.obs{
+  padding: 10px 15px;
+}
+
+.caminho-arquivo{
+  padding: 5px 15px;
+  background: #666666;
+}

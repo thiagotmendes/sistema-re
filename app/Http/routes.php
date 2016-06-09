@@ -1,15 +1,7 @@
 <?php
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
-
+/* ARUIVO PARA EXECUÇÃO DE ROTAS */
+###################################################################################################################
+// CAMINHO PARA O FORMULÁRIO DE LOGIN
 Route::get('/', function () {
     return view('forms/login');
 });
@@ -40,3 +32,8 @@ Route::get('editar-usuarios/{id?}',['as' => 'editar-usuarios/{id?}', 'uses' => '
 
 // ROTA PARA O GRID DE USUARIOS
 Route::get('lista-usuarios', ['as' => 'lista-usuarios', 'uses' => 'gridUsuarios@grid_user']);
+
+// EXECUTA O FORM PARA ANEXO DE ARQUIVOS
+Route::get('procedimento/{id}',['as' => 'procedimento/{id}', 'uses' => 'acompanhamentoUsuarios@processo_usuario']);
+
+Route::post('anexa-arquivo', ['as' => 'anexa-arquivo', 'uses' => 'acompanhamentoUsuarios@anexaArquivo']);

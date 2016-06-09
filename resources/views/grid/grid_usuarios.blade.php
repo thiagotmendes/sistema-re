@@ -25,12 +25,12 @@
           <td>{{ $user_list->empresa }}</td>
           <td>{{ $user_list->usuario }}</td>
           <td class="btn-table">
-            <button type="button" name="button" class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Interagir chamado">
+            <a href="procedimento/{{ $user_list->idusuario }}" class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Interagir chamado">
               <i class="fa fa-file-word-o"></i>
-            </button>
+            </a>
           </td>
           <td class="btn-table">
-            <a href="editar-usuarios/{{ $user_list->idusuario }}" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Editar Usuário"> 
+            <a href="editar-usuarios/{{ $user_list->idusuario }}" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Editar Usuário">
               <i class="fa fa-pencil"></i>
             </a>
           </td>
