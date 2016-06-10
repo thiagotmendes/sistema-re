@@ -3,22 +3,32 @@
 @section('title', 'Cadastro de Usuários')
 @section('container')
   <div class="col-md-8">
-    @foreach($grid_interacoes as $interacoes)
-      <div class="interacoes-grid">
-        <div class="title-interact">
-          {{ $interacoes->assunto }}
-          <div class="pull-right">
-            {{ date('F d, Y', strtotime($interacoes->created_at)) }}
+    @if(empty($grid_interacoes))
+      <div class="alert alert-danger">
+        Nenhuma interação inserida para este usuário
+      </div>
+    @else
+      @foreach($grid_interacoes as $interacoes)
+        <div class="interacoes-grid">
+          <div class="title-interact">
+            {{ $interacoes->assunto }}
+            <div class="pull-right">
+              {{ date('F d, Y', strtotime($interacoes->idanexoUsuario)) }}
+              <a href="<?= url('excluiProcess/'.$interacoes->idanexoUsuario) ?>" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
+            </div>
+          </div>
+          <div class="obs">
+            {{ $interacoes->observacao }}
+          </div>
+          <div class="caminho-arquivo">
+            <a href="<?= url($interacoes->patchArquivo) ?>" class="btn btn-info" download="{{ $interacoes->patchArquivo }}" target="_blank">
+              Arquivo em anexo <i class="fa fa-file" aria-hidden="true"></i>
+            </a>
+            {{ $interacoes->patchArquivo }}
           </div>
         </div>
-        <div class="obs">
-          {{ $interacoes->observacao }}
-        </div>
-        <div class="caminho-arquivo">
-          <a href="{{ $interacoes->patchArquivo }}" class="btn btn-info" download="{{ $interacoes->patchArquivo }}"> Arquivo em anexo <i class="fa fa-file" aria-hidden="true"></i> </a>
-        </div>
-      </div>
-    @endforeach
+      @endforeach
+    @endif
   </div>
   <div class="col-md-4">
     <div class="form-anexo">

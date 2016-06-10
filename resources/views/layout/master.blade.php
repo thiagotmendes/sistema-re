@@ -56,10 +56,15 @@
     </nav>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-3">
-          @include('include.menu')
-        </div>
-        <div class="col-md-9">
+        @if($tipoUsuario['tipouser'] == 2)
+          <div class="col-md-3">
+            @include('include.menu')
+          </div>
+          <?php $coluna_estrutura = 'col-md-9' ?>
+        @else
+          <?php $coluna_estrutura = 'col-md-12' ?>
+        @endif
+        <div class="<?= $coluna_estrutura ?>">
           @yield('container')
         </div>
       </div>

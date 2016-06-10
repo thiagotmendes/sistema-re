@@ -15,12 +15,15 @@ route::get('deslogar', ['as' => 'deslogar', 'uses' => 'geraLogin@desloga_sistema
 Route::get('home', function()
 {
   $usuario = Session::get('usuario');
+  $tipo_usuario = Session::get('tipoUsuario');
   if ($usuario) {
-    return View('paginas/home', [ 'nome_usuario' => $usuario ]);
+    return View('paginas/home', [ 'nome_usuario' => $usuario, 'tipoUsuario' => $tipo_usuario ]);
   } else {
     return redirect('/');
   }
 });
+
+Route::get('dashuser',['as' => 'dashuser', 'uses' => 'acompanhamentoUsuarios@areaCliente']);
 
 // ROTA PARA O FORMULARIO DE CADASTRO DE USUARIOS
 Route::get('cadastrar-usuarios', ['as' => 'cadastrar-usuarios', 'uses' => 'gridUsuarios@form_cadastro']);
@@ -35,5 +38,5 @@ Route::get('lista-usuarios', ['as' => 'lista-usuarios', 'uses' => 'gridUsuarios@
 
 // EXECUTA O FORM PARA ANEXO DE ARQUIVOS
 Route::get('procedimento/{id}',['as' => 'procedimento/{id}', 'uses' => 'acompanhamentoUsuarios@processo_usuario']);
-
 Route::post('anexa-arquivo', ['as' => 'anexa-arquivo', 'uses' => 'acompanhamentoUsuarios@anexaArquivo']);
+Route::get('excluiProcess/{id}',['as' => 'excluiProcess/{id}', 'uses' => 'acompanhamentoUsuarios@excluiArquivo']);

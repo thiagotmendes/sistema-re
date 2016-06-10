@@ -50,4 +50,13 @@
 .caminho-arquivo{
   padding: 5px 15px;
   background: #666666;
+  color: #fff;
+}
+
+.nav-lateral{
+}
+
+.nav-lateral a:hover{
+  background: #0f75bc !important;
+  color: #fff;
 }

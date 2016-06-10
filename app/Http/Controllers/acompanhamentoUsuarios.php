@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -12,14 +11,16 @@ use Illuminate\Support\Facades\Input;
 
 class acompanhamentoUsuarios extends Controller
 {
+  // DIRECIONA PARA A TELA COM DADOS DO USUÁRIO
   public function processo_usuario($id)
   {
     $usuario = Session::get('usuario');
-    $dados_user = DB::select('select * from res_anexousuario where idusuario = :idusuario', ['idusuario' => $id]);
-
-    return view('forms/form-anexo',[ 'nome_usuario' => $usuario, 'id' => $id, 'grid_interacoes' => $dados_user ]);
+    $tipo_usuario = Session::get('tipoUsuario');
+    $dados_user = DB::select('select * from res_anexousuario where idusuario = :idusuario order by created_at', ['idusuario' => $id]);
+    return view('forms/form-anexo',[ 'nome_usuario' => $usuario, 'tipoUsuario' => $tipo_usuario, 'id' => $id, 'grid_interacoes' => $dados_user ]);
   }
 
+  // CRIA O METODO PARA CRIAR OS PROCESSOS E ANEXAR ARQUIVOS
   public function anexaArquivo(Request $formAnexa)
   {
     $idusuario    = $formAnexa->idusuario;
@@ -40,14 +41,38 @@ class acompanhamentoUsuarios extends Controller
     if ($formAnexa->_token) {
       DB::table('anexousuario')->insert(
         [
-          'idusuario'   => $idusuario,
-          'assunto'     => $assunto,
-          'observacao'  => $observacoes,
-          'patchArquivo'       => $destinationPath.$filename,
-          'created_at'  =>  DB::raw('now()')
+          'idusuario'     => $idusuario,
+          'assunto'       => $assunto,
+          'observacao'    => $observacoes,
+          'patchArquivo'  => "/arquivos/".$filename,
+          'created_at'    =>  DB::raw('now()')
         ]
       );
     }
     return redirect()->route('procedimento/{id}',['id' => $idusuario ]);
   }
+
+  // cria o metodo que direciona para a área do cliente
+  public function areaCliente()
+  {
+    $usuario = Session::get('usuario');
+    $tipo_usuario = Session::get('tipoUsuario');
+
+    if ($usuario) {
+      $dados_user = DB::table('anexousuario')
+                    ->join('usuarios', 'anexousuario.idusuario','=','usuarios.idusuario')
+                    ->where('usuario','=',$usuario['nome'])
+                    ->orderby('idanexoUsuario','desc')
+                    ->get();
+      return View('paginas/dashUsuario', [ 'nome_usuario' => $usuario, 'tipoUsuario' => $tipo_usuario, 'acompanhamentoUser' => $dados_user]);
+    } else {
+      return redirect('/');
+    }
+  }
+
+  public function excluiArquivo($id)
+  {
+    DB::table('anexousuario')->where('idanexoUsuario', '=', $id)->delete();
+  }
+
 }

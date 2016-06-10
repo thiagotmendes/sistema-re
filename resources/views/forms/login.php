@@ -25,7 +25,9 @@
         <div class="text-center">
           <img src="http://gruporesendechaves.com.br/wp-content/themes/resendechaves/images/logo.jpg" alt="" />
         </div>
-
+        <?php if($_GET['msg']): ?>
+          <div class="alert alert-danger" style="margin:10px 0;"> Erro ao tentar efetuar o Login <br /> tente novamente preenchendo os campos abaixo corretamente </div>
+        <?php endif; ?>
         <form class="" action="<?= route('geralogin') ?>" method="post">
           <div class="form-group">
             <label for="nome">Nome</label>

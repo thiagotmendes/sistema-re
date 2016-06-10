@@ -14,17 +14,19 @@ class gridUsuarios extends Controller
   public  function form_cadastro()
   {
     $usuario = Session::get('usuario');
-    return view('forms/cadastro-user',[ 'nome_usuario' => $usuario ]);
+    $tipo_usuario = Session::get('tipoUsuario');
+    return view('forms/cadastro-user',[ 'nome_usuario' => $usuario,'tipoUsuario' => $tipo_usuario ]);
   }
   //REALIZA O CADASTRO DOS USUARIOS VIA POST COM BULD->INSERT
   public function postForm(Request $formUsuario)
   {
-    $nome     = $formUsuario->nome;
-    $email    = $formUsuario->email;
-    $empresa  = $formUsuario->empresa;
-    $telefone = $formUsuario->telefone;
-    $usuario  = $formUsuario->usuario;
-    $senha    = $formUsuario->senha;
+    $nome         = $formUsuario->nome;
+    $email        = $formUsuario->email;
+    $empresa      = $formUsuario->empresa;
+    $telefone     = $formUsuario->telefone;
+    $usuario      = $formUsuario->usuario;
+    $tipoUsuario  = $formUsuario->tipoUsuario;
+    $senha        = $formUsuario->senha;
     if ($formUsuario->_token) {
       DB::table('usuarios')->insert(
         [
@@ -34,6 +36,7 @@ class gridUsuarios extends Controller
           'telefone'    => $telefone,
           'usuario'     => $usuario,
           'senha'       => $senha,
+          'tipoUsuario' => $tipoUsuario,
           'created_at'  =>  DB::raw('now()')
         ]
       );
@@ -45,11 +48,11 @@ class gridUsuarios extends Controller
   public function form_edita_user($id)
   {
     $usuario = Session::get('usuario');
-
-    $dados_user = DB::select('select * from res_usuarios where idusuario = :idusuario', ['idusuario' => $id]);
+    $tipo_usuario = Session::get('tipoUsuario');
+    $dados_user = DB::select('select * from res_usuarios where idusuario = :idusuario and tipoUsuario <> 2 order by created_at desc', ['idusuario' => $id]);
     //var_dump($dados_user);
 
-    return view('forms/cadastro-user',[ 'nome_usuario' => $usuario, 'dados_user' => $dados_user ]);
+    return view('forms/cadastro-user',[ 'nome_usuario' => $usuario,'tipoUsuario' => $tipo_usuario, 'dados_user' => $dados_user ]);
   }
 
 
@@ -57,8 +60,9 @@ class gridUsuarios extends Controller
   public function grid_user()
   {
     $usuario = Session::get('usuario');
+    $tipo_usuario = Session::get('tipoUsuario');
     $lista_user = DB::select('select * from res_usuarios');
-    return view('grid/grid_usuarios',[ 'nome_usuario' => $usuario, 'lista_usuarios' => $lista_user ]);
+    return view('grid/grid_usuarios',[ 'nome_usuario' => $usuario, 'tipoUsuario' => $tipo_usuario, 'lista_usuarios' => $lista_user ]);
   }
 
 }
