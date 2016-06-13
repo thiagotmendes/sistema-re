@@ -11,9 +11,22 @@
 |
 */
 
+/*class Application extends Illuminate\Foundation\Application
+{
+  public function publicPath()
+  {
+    // Coloque o nome da sua pasta pública no lugar de 'public_html', se não for esse nome.
+    return $this->basePath().DIRECTORY_SEPARATOR.'/plataforma';
+  }
+}*/
+
 $app = new Illuminate\Foundation\Application(
     realpath(__DIR__.'/../')
 );
+
+/*$app = new Application(
+  realpath(__DIR__.'/../')
+);*/
 
 /*
 |--------------------------------------------------------------------------

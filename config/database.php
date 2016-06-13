@@ -54,11 +54,11 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', 'localhost'),
+            'host' => env('DB_HOST', 'sistema_rezend.mysql.dbaas.com.br'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'resende_sistema'),
-            'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', ''),
+            'database' => env('DB_DATABASE', 'sistema_rezend'),
+            'username' => env('DB_USERNAME', 'sistema_rezend'),
+            'password' => env('DB_PASSWORD', 'r3zsit#dom206'),
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix' => 'res_',

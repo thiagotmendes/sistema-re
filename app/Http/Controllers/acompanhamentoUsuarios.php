@@ -73,6 +73,7 @@ class acompanhamentoUsuarios extends Controller
   public function excluiArquivo($id)
   {
     DB::table('anexousuario')->where('idanexoUsuario', '=', $id)->delete();
+
   }
 
 }

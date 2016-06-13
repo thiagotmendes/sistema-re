@@ -19,16 +19,24 @@ class geraLogin extends Controller
         $resultado = DB::select('select * from res_usuarios where usuario = :nome and senha = :senha', ['nome' => $nome, 'senha' => $senha]);
         if(!empty($nome)){
           if(!empty($senha)){
-            $nome_resultado =  $resultado[0]->nome;
+            if(!empty($resultado)):
+              $nome_resultado =  $resultado[0]->nome;
+            else:
+              return redirect('/?msg=erro');
+            endif;
             if ($nome_resultado) {
-              // Obtém algum dado da sessão...
-              Session::put('usuario', ['nome' => $nome]);
-              Session::put('tipoUsuario', ['tipouser' => $resultado[0]->tipoUsuario]);
-              if ($resultado[0]->tipoUsuario == 2) {
-                return redirect('/home');
-              } else {
-                return redirect('/dashuser');
-              }
+              if(!empty($nome_resultado)):
+                // Obtém algum dado da sessão...
+                Session::put('usuario', ['nome' => $nome]);
+                Session::put('tipoUsuario', ['tipouser' => $resultado[0]->tipoUsuario]);
+                if ($resultado[0]->tipoUsuario == 2) {
+                  return redirect('/home');
+                } else {
+                  return redirect('/dashuser');
+                }
+              else:
+                return redirect('/?msg=erro');
+              endif;
             }
           } else {
             return redirect('/?msg=erro');
