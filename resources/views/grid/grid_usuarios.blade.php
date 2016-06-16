@@ -25,7 +25,7 @@
           <td>{{ $user_list->empresa }}</td>
           <td>{{ $user_list->usuario }}</td>
           <td class="btn-table">
-            <a href="procedimento/{{ $user_list->idusuario }}" class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Interagir chamado">
+            <a href="procedimento/{{ $user_list->idusuario }}" class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Inserir Arquivo">
               <i class="fa fa-file-word-o"></i>
             </a>
           </td>

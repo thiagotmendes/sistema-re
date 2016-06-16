@@ -2,6 +2,8 @@
 
 return [
 
+    'Date' => Jenssegers\Date\Date::class,
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

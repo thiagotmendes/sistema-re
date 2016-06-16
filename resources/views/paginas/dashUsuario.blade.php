@@ -2,8 +2,6 @@
 
 @section('title', 'principal')
 @section('container')
-  <h1>Olá!</h1>
-  Área do usuário
   @if(empty($acompanhamentoUser))
     <div class="alert alert-danger">
       Nenhuma interação inserida para este usuário
@@ -14,7 +12,7 @@
         <div class="title-interact">
           {{ $interacoes->assunto }}
           <div class="pull-right">
-            {{ date('F d, Y', strtotime($interacoes->created_at)) }}
+            <span class="label label-primary">{{ date('d/m/Y', strtotime($interacoes->idanexoUsuario)) }}</span>
           </div>
         </div>
         <div class="obs">
@@ -24,6 +22,12 @@
           <a href="<?= url($interacoes->patchArquivo) ?>" class="btn btn-info" target="_blank">
             Arquivo em anexo <i class="fa fa-file" aria-hidden="true"></i>
           </a>
+          <?php
+          $arquivo = $interacoes->patchArquivo;
+          $var_teste = explode( '/', $arquivo);
+          //var_dump($var_teste);
+          echo $var_teste[2];
+          ?>
         </div>
       </div>
     @endforeach

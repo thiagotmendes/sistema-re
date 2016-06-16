@@ -35,21 +35,27 @@ class acompanhamentoUsuarios extends Controller
     $extension = Input::file('arquivo')->getClientOriginalExtension();
     // cria um nome para o arquivo
     $filename = 'arq-'. $data_interacao."-". rand(1111,9999) .".". $extension;
-    // realiza o upload do arquivo
-    Input::file('arquivo')->move($destinationPath, $filename);
-    // insere os dados do acompanhamento no banco de dados
-    if ($formAnexa->_token) {
-      DB::table('anexousuario')->insert(
-        [
-          'idusuario'     => $idusuario,
-          'assunto'       => $assunto,
-          'observacao'    => $observacoes,
-          'patchArquivo'  => "/arquivos/".$filename,
-          'created_at'    =>  DB::raw('now()')
-        ]
-      );
-    }
-    return redirect()->route('procedimento/{id}',['id' => $idusuario ]);
+
+    $extencao = array('doc','pdf','txt','docx','xls','xlsx');
+    if(in_array($extension,$extencao)):
+      // realiza o upload do arquivo
+      Input::file('arquivo')->move($destinationPath, $filename);
+      // insere os dados do acompanhamento no banco de dados
+      if ($formAnexa->_token) {
+        DB::table('anexousuario')->insert(
+          [
+            'idusuario'     => $idusuario,
+            'assunto'       => $assunto,
+            'observacao'    => $observacoes,
+            'patchArquivo'  => "/arquivos/".$filename,
+            'created_at'    =>  DB::raw('now()')
+          ]
+        );
+      }
+      return redirect()->route('procedimento/{id}',['id' => $idusuario ]);
+    else:
+      return redirect('procedimento/'.$idusuario."?msg=anexerro");
+    endif;
   }
 
   // cria o metodo que direciona para a área do cliente
